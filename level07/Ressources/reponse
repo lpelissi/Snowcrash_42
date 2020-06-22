@@ -33,4 +33,5 @@ on obtient : "level07"
 on change la valeur de cette dernière par getflag : export LOGNAME='`getflag`'
 
 on relance l'executable : ./level07
+on obtient le flag
 —> Check flag.Here is your token : fiumuikeil55xe9cu4dood66h
