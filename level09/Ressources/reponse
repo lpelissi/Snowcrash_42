@@ -1,0 +1,47 @@
+Level09 :
+
+on se connecte avec le flag08
+
+on se place dans le home : cd 
+
+on inspecte l'ensemble des dossiers et fichiers et leur droits : ls -la
+
+on peut voir un fichier executable : level09
+et un fichier : token
+
+on effectue une série de test avec l'executable
+
+	level09@SnowCrash:~$ ./level09
+	You need to provied only one arg.
+
+	level09@SnowCrash:~$ ./level09 token
+	tpmhr
+
+	level09@SnowCrash:~$ ./level09 aaaaaaaaaaaaaaaaaaaaaaaaaa
+	abcdefghijklmnopqrstuvwxyz
+
+	level09@SnowCrash:~$ ./level09 abcdefghijklmnopqrstuvwxyz
+	acegikmoqsuwy{}����������
+
+	on en déduit que le cryptage décale du nombre de caractère en fonction de la place dans la chaine
+
+	level09@SnowCrash:~$ cat token
+	f4kmm6p|=�p�n��DB�Du{��
+
+
+on copie le token sur une autre VM 
+ scp -P 4242 level09@192.168.0.27:/home/user/level09/token .
+
+on crée un programme pour le décrypter (cf. decrypt.php)
+
+lester@debian:~$ php decrypt.php
+f3iji1ju5yuevaus41q1afiuq
+
+on récupère le flag
+level09@SnowCrash:~$ su flag09
+Password:
+Don't forget to launch getflag !
+flag09@SnowCrash:~$ getflag
+Check flag.Here is your token : s5cAJpM8ev6XHw998pRWG728z
+
+

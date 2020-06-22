@@ -1,0 +1,26 @@
+Level01 :
+
+on se connecte avec le flag00
+
+on se place a la racine : cd /
+
+on inspecte l'ensemble des dossiers et fichiers et leur droitsb : ls -la
+
+on affiche les informations sur les utilisateur qui peuvent se connecter : cat etc/passwd
+
+on peut voir qu'il y a un mots de passe au niveau du password du flag01 cela siginifie qu'il est cypté par la fonction crypt de ubuntu
+
+on telecharge une autre VM de pour y installer un paquet permettant de craquer les mots de passes
+
+Debian64 fait très bien l'affaire 
+
+on installe john the ripper : apt install john
+
+on copie le contenu de etc/passwd sur notre nouvelle machine : scp -P 4242 level01@192.168.0.27:/etc/passwd .
+
+on lance la commande pour decrypter le mot de passe : sudo john -user=flag01 ./passwd
+
+on obtient la ligne : 
+—> abcdefg          (flag01)
+
+tester le mot de passe obtenu pour obtenir le flag : f2av5il02puano7naaf6adaaf

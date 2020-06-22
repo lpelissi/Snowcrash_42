@@ -1,0 +1,26 @@
+Level00 :
+
+on se connecte en ssh
+
+on se place a la racine : cd /
+
+on inspecte l'ensemble des dossiers et fichiers et leur droitsb : ls -la
+
+on affiche les informations sur les utilisateur qui peuvent se connecter : cat etc/passwd
+
+on peut voir un x dans le champ mot de passe de flag00 , les mots de passes sont stockés dans le fichiers etc/shadow
+
+on essaie d'afficher le contenu etc/shadow mais nous n'avons pas les droits 
+
+on affiche l'ensemble des fichiers de lié à l'utilisateur et au groupe flag00 : find / -user flag00 -group flag00
+
+on peut voir que 2 fichiers ne sont pas protégés : /usr/sbin/john et cat /rofs/usr/sbin/john
+
+en regardant leur contenu on obtient la chaine de caractère suivante : cdiiddwpgswtgt
+
+on décrypte le mot de passe (ce n'est ni du md5 ni du sha, reste la possibilité du ROT)
+
+on produit le code et teste les posiibilités (cf. main.c)
+
+Le bon mot de passe est : nottoohardhere
+on récupère le flag : x24ti5gi3x0ol2eh4esiuxias

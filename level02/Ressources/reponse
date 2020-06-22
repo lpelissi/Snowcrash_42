@@ -1,0 +1,30 @@
+Level02 :
+
+on se connecte avec le flag01
+
+on se place dans le home : cd 
+
+on inspecte l'ensemble des dossiers et fichiers et leur droitsb : ls -la
+
+on peut voir un fichier level02.pcap
+
+L'extension .pcap  est associée a Wireshark (programme d'analyse réseaux)
+ces fichiers contiennent des donnés en paquets
+
+Sur l'autre VM, on installe Wireshark : apt install wireshark
+
+on y copie le fichier level02.pcap : scp -P 4242 level02@192.168.0.27:/home/user/level02/level02.pcap .
+
+on donne les droits d'accès si besoin : chmod 777 level02.pcap
+
+on lance Wireshark : wireshark level02.pcap
+
+on observe le contenu des paquets, on peut voir que sur le 43eme il y a "password" 
+
+on clique droit sur la ligne 43 et sélectionne suivre ——> TCP
+
+on y voit la ligne —> Password: ft_wandr...NDRel.L0L
+
+sans les caractère à enlever (l.le.ev.ve.el.lX.X —> levelX): ft_waNDReL0L
+
+on récupère le flag : kooda2puivaav1idi4f57q8iq

