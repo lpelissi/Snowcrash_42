@@ -69,10 +69,9 @@ on relance l'executable avec le fichier dans tmp
 on obtient le mot de passe du flag
 	quif5eloekouj29ke0vouxean
 
-pn récupère le flag
+on récupère le flag
 	level08@SnowCrash:~$ su flag08
 	Password:
 	Don't forget to launch getflag !
 	flag08@SnowCrash:~$ getflag
 	Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f
-	
